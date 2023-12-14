@@ -6,14 +6,14 @@ import type { TransactionType } from 'types/api/transaction';
 
 import Tag from 'ui/shared/chakra/Tag';
 export interface Props {
-  rowInput: string;
+  rawInput: string;
   types: Array<TransactionType>;
   isLoading?: boolean;
 }
 
 const TYPES_ORDER = [ 'rootstock_remasc', 'rootstock_bridge', 'token_creation', 'contract_creation', 'token_transfer', 'contract_call', 'coin_transfer' ];
 
-const TxType = ({ rowInput = '', types, isLoading }: Props) => {
+const TxType = ({ rawInput, types, isLoading }: Props) => {
   const typeToShow = types.sort((t1, t2) => TYPES_ORDER.indexOf(t1) - TYPES_ORDER.indexOf(t2))[0];
   let label;
   let colorScheme;
@@ -55,8 +55,8 @@ const TxType = ({ rowInput = '', types, isLoading }: Props) => {
       colorScheme = 'purple';
 
   }
-  if (findMethodBySignature(rowInput.substring(0, 10), tagList)) {
-    label = findMethodBySignature(rowInput.substring(0, 10), tagList);
+  if (findMethodBySignature(rawInput.substring(0, 10), tagList)) {
+    label = findMethodBySignature(rawInput.substring(0, 10), tagList);
   }
   return (
     <Tag colorScheme={ colorScheme } isLoading={ isLoading }>
