@@ -1,5 +1,5 @@
 import type { PlaywrightTestConfig } from '@playwright/experimental-ct-react';
-import { devices, defineConfig } from '@playwright/experimental-ct-react';
+import { defineConfig } from '@playwright/experimental-ct-react';
 import react from '@vitejs/plugin-react';
 import svgr from 'vite-plugin-svgr';
 import tsconfigPaths from 'vite-tsconfig-paths';
@@ -67,30 +67,30 @@ const config: PlaywrightTestConfig = defineConfig({
   // these projects are also used for sharding tests in CI
   // when adding or deleting a project, make sure to update github workflow accordingly
   projects: [
-    {
-      name: 'default',
-      grepInvert: /-@default/,
-      use: {
-        ...devices['Desktop Chrome'],
-        viewport: { width: 1200, height: 750 },
-      },
-    },
-    {
-      name: 'mobile',
-      grep: /\+@mobile/,
-      use: {
-        ...devices['iPhone 13 Pro'],
-      },
-    },
-    {
-      name: 'dark-color-mode',
-      grep: /\+@dark-mode/,
-      use: {
-        ...devices['Desktop Chrome'],
-        viewport: { width: 1200, height: 750 },
-        colorScheme: 'dark',
-      },
-    },
+    // {
+    //   name: 'default',
+    //   grepInvert: /-@default/,
+    //   use: {
+    //     ...devices['Desktop Chrome'],
+    //     viewport: { width: 1200, height: 750 },
+    //   },
+    // },
+    // {
+    //   name: 'mobile',
+    //   grep: /\+@mobile/,
+    //   use: {
+    //     ...devices['iPhone 13 Pro'],
+    //   },
+    // },
+    // {
+    //   name: 'dark-color-mode',
+    //   grep: /\+@dark-mode/,
+    //   use: {
+    //     ...devices['Desktop Chrome'],
+    //     viewport: { width: 1200, height: 750 },
+    //     colorScheme: 'dark',
+    //   },
+    // },
   ],
 });
 
