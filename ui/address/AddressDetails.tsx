@@ -38,7 +38,7 @@ const AddressDetails = ({ addressQuery, scrollRef }: Props) => {
   const router = useRouter();
 
   const addressHash = getQueryParamString(router.query.hash);
-
+  const [ isLoading, setIsLoading ] = React.useState(true);
   const countersQuery = useApiQuery('address_counters', {
     pathParams: { hash: addressHash },
     queryOptions: {
@@ -48,13 +48,14 @@ const AddressDetails = ({ addressQuery, scrollRef }: Props) => {
   });
   const provider = new ethers.JsonRpcProvider(chain.rpcUrl);
   const contract = new ethers.Contract(chain.aspectAddress, AspectABI, provider);
-
   contract.aspectsOf(addressHash).then(res => {
     if (countersQuery.data) {
       countersQuery.data.aspect_binding_count = res.length;
     }
   }).catch(err => {
     return Promise.reject(err);
+  }).finally(() => {
+    setIsLoading(false);
   });
 
   const handleCounterItemClick = React.useCallback(() => {
@@ -99,6 +100,9 @@ const AddressDetails = ({ addressQuery, scrollRef }: Props) => {
     return null;
   }
 
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
   return (
     <Box>
       <AddressHeadingInfo address={ data } token={ data.token } isLoading={ addressQuery.isPlaceholderData } isLinkDisabled/>
