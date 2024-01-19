@@ -48,6 +48,7 @@ const AddressDetails = ({ addressQuery, scrollRef }: Props) => {
   });
   const provider = new ethers.JsonRpcProvider(chain.rpcUrl);
   const contract = new ethers.Contract(chain.aspectAddress, AspectABI, provider);
+
   contract.aspectsOf(addressHash).then(res => {
     if (countersQuery.data) {
       countersQuery.data.aspect_binding_count = res.length;
