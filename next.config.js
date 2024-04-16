@@ -42,7 +42,7 @@ const moduleExports = {
   rewrites,
   redirects,
   headers,
-  output: 'standalone',
+  // output: 'standalone',
   productionBrowserSourceMaps: true,
   experimental: {
     instrumentationHook: true,
