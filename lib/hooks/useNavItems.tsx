@@ -54,12 +54,12 @@ export default function useNavItems(): ReturnType {
     } : null;
 
     const verifiedContracts: NavItem | null =
-     {
-       text: 'Verified contracts',
-       nextRoute: { pathname: '/verified-contracts' as const },
-       icon: 'verified',
-       isActive: pathname === '/verified-contracts',
-     };
+    {
+      text: 'Verified contracts',
+      nextRoute: { pathname: '/verified-contracts' as const },
+      icon: 'verified',
+      isActive: pathname === '/verified-contracts',
+    };
     const ensLookup = config.features.nameService.isEnabled ? {
       text: 'Name services lookup',
       nextRoute: { pathname: '/name-domains' as const },
@@ -161,7 +161,7 @@ export default function useNavItems(): ReturnType {
         txs,
         userOps,
         blocks,
-        topAccounts,
+        // topAccounts, hide this nav
         validators,
         verifiedContracts,
         ensLookup,
@@ -174,30 +174,30 @@ export default function useNavItems(): ReturnType {
       ].filter(Boolean);
     }
 
-    const apiNavItems: Array<NavItem> = [
-      config.features.restApiDocs.isEnabled ? {
-        text: 'REST API',
-        nextRoute: { pathname: '/api-docs' as const },
-        icon: 'restAPI',
-        isActive: pathname === '/api-docs',
-      } : null,
-      config.features.graphqlApiDocs.isEnabled ? {
-        text: 'GraphQL',
-        nextRoute: { pathname: '/graphiql' as const },
-        icon: 'graphQL',
-        isActive: pathname === '/graphiql',
-      } : null,
-      !config.UI.sidebar.hiddenLinks?.rpc_api && {
-        text: 'RPC API',
-        icon: 'RPC',
-        url: 'https://docs.blockscout.com/for-users/api/rpc-endpoints',
-      },
-      !config.UI.sidebar.hiddenLinks?.eth_rpc_api && {
-        text: 'Eth RPC API',
-        icon: 'RPC',
-        url: ' https://docs.blockscout.com/for-users/api/eth-rpc',
-      },
-    ].filter(Boolean);
+    // const apiNavItems: Array<NavItem> = [
+    //   config.features.restApiDocs.isEnabled ? {
+    //     text: 'REST API',
+    //     nextRoute: { pathname: '/api-docs' as const },
+    //     icon: 'restAPI',
+    //     isActive: pathname === '/api-docs',
+    //   } : null,
+    //   config.features.graphqlApiDocs.isEnabled ? {
+    //     text: 'GraphQL',
+    //     nextRoute: { pathname: '/graphiql' as const },
+    //     icon: 'graphQL',
+    //     isActive: pathname === '/graphiql',
+    //   } : null,
+    //   !config.UI.sidebar.hiddenLinks?.rpc_api && {
+    //     text: 'RPC API',
+    //     icon: 'RPC',
+    //     url: 'https://docs.blockscout.com/for-users/api/rpc-endpoints',
+    //   },
+    //   !config.UI.sidebar.hiddenLinks?.eth_rpc_api && {
+    //     text: 'Eth RPC API',
+    //     icon: 'RPC',
+    //     url: ' https://docs.blockscout.com/for-users/api/eth-rpc',
+    //   },
+    // ].filter(Boolean);
 
     const mainNavItems: ReturnType['mainNavItems'] = [
       {
@@ -224,12 +224,13 @@ export default function useNavItems(): ReturnType {
         icon: 'stats',
         isActive: pathname === '/stats',
       } : null,
-      apiNavItems.length > 0 && {
-        text: 'API',
-        icon: 'restAPI',
-        isActive: apiNavItems.some(item => isInternalItem(item) && item.isActive),
-        subItems: apiNavItems,
-      },
+      // 去掉Api
+      // apiNavItems.length > 0 && {
+      //   text: 'API',
+      //   icon: 'restAPI',
+      //   isActive: apiNavItems.some(item => isInternalItem(item) && item.isActive),
+      //   subItems: apiNavItems,
+      // },
       {
         text: 'Other',
         icon: 'gear',
