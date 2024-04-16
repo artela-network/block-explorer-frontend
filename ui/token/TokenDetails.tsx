@@ -14,7 +14,7 @@ import getCurrencyValue from 'lib/getCurrencyValue';
 import { TOKEN_COUNTERS } from 'stubs/token';
 import type { TokenTabs } from 'ui/pages/Token';
 import DetailsInfoItem from 'ui/shared/DetailsInfoItem';
-import DetailsSponsoredItem from 'ui/shared/DetailsSponsoredItem';
+// import DetailsSponsoredItem from 'ui/shared/DetailsSponsoredItem';
 import TruncatedValue from 'ui/shared/TruncatedValue';
 
 import TokenNftMarketplaces from './TokenNftMarketplaces';
@@ -163,7 +163,7 @@ const TokenDetails = ({ tokenQuery }: Props) => {
 
       { type !== 'ERC-20' && <TokenNftMarketplaces hash={ hash } isLoading={ tokenQuery.isPlaceholderData }/> }
 
-      <DetailsSponsoredItem isLoading={ tokenQuery.isPlaceholderData }/>
+      { /* <DetailsSponsoredItem isLoading={ tokenQuery.isPlaceholderData }/> */ }
     </Grid>
   );
 };
