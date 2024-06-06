@@ -6,7 +6,7 @@ import type { Blob } from 'types/api/blobs';
 import CopyToClipboard from 'ui/shared/CopyToClipboard';
 import DetailsInfoItem from 'ui/shared/DetailsInfoItem';
 import DetailsInfoItemDivider from 'ui/shared/DetailsInfoItemDivider';
-import DetailsSponsoredItem from 'ui/shared/DetailsSponsoredItem';
+// import DetailsSponsoredItem from 'ui/shared/DetailsSponsoredItem';
 import TxEntity from 'ui/shared/entities/tx/TxEntity';
 
 import BlobData from './BlobData';
@@ -77,7 +77,7 @@ const BlobInfo = ({ data, isLoading }: Props) => {
           <TxEntity hash={ data.transaction_hashes[0].transaction_hash } isLoading={ isLoading } noIcon noCopy={ false }/>
         </DetailsInfoItem>
       ) }
-      <DetailsSponsoredItem isLoading={ isLoading }/>
+      { /* <DetailsSponsoredItem isLoading={ isLoading }/> */ }
 
       { data.blob_data && (
         <>

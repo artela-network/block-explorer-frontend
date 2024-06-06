@@ -9,7 +9,7 @@ import ServiceDegradationWarning from 'ui/shared/alerts/ServiceDegradationWarnin
 import isCustomAppError from 'ui/shared/AppError/isCustomAppError';
 import DataFetchAlert from 'ui/shared/DataFetchAlert';
 import DetailsInfoItem from 'ui/shared/DetailsInfoItem';
-import DetailsSponsoredItem from 'ui/shared/DetailsSponsoredItem';
+// import DetailsSponsoredItem from 'ui/shared/DetailsSponsoredItem';
 import AddressEntity from 'ui/shared/entities/address/AddressEntity';
 import BlockEntity from 'ui/shared/entities/block/BlockEntity';
 import TxEntity from 'ui/shared/entities/tx/TxEntity';
@@ -34,7 +34,6 @@ const AddressDetails = ({ addressQuery, scrollRef }: Props) => {
     hash: addressHash,
     addressQuery,
   });
-
   const handleCounterItemClick = React.useCallback(() => {
     window.setTimeout(() => {
       // cannot do scroll instantly, have to wait a little
@@ -214,7 +213,26 @@ const AddressDetails = ({ addressQuery, scrollRef }: Props) => {
             />
           </DetailsInfoItem>
         ) }
-        <DetailsSponsoredItem isLoading={ addressQuery.isPlaceholderData }/>
+        { countersQuery.data?.gas_usage_count && (
+          <DetailsInfoItem
+            title="Binding Aspect"
+            hint="The number of bound aspects"
+            isLoading={ addressQuery.isPlaceholderData || countersQuery.isPlaceholderData }
+          >
+            { addressQuery.data ? (
+              <AddressCounterItem
+                prop="gas_usage_count"
+                query={ countersQuery }
+                address={ data.hash }
+                onClick={ handleCounterItemClick }
+                isAddressQueryLoading={ addressQuery.isPlaceholderData }
+                isDegradedData={ addressQuery.isDegradedData }
+              />
+            ) :
+              0 }
+          </DetailsInfoItem>
+        ) }
+        { /* <DetailsSponsoredItem isLoading={addressQuery.isPlaceholderData} /> */ }
       </Grid>
     </>
   );
