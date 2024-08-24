@@ -33,7 +33,7 @@ const Footer = () => {
       icon: discordIcon,
       iconSize: '18px',
       text: 'Discord',
-      url: 'https://discord.com/invite/artela',
+      url: 'https://discord.com/invite/artelanetwork',
     },
   ];
 
