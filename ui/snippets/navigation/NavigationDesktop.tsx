@@ -3,7 +3,7 @@ import React from 'react';
 
 import config from 'configs/app';
 import chevronIcon from 'icons/arrows/east-mini.svg';
-import governanceIcon from 'icons/governance.svg';
+import governanceIcon from 'icons/gov.svg';
 import stakingIcon from 'icons/staking.svg';
 import testnetIcon from 'icons/testnet.svg';
 import { useAppContext } from 'lib/contexts/app';
