@@ -3,6 +3,8 @@ import React from 'react';
 
 import config from 'configs/app';
 import chevronIcon from 'icons/arrows/east-mini.svg';
+import governanceIcon from 'icons/governance.svg';
+import stakingIcon from 'icons/staking.svg';
 import testnetIcon from 'icons/testnet.svg';
 import { useAppContext } from 'lib/contexts/app';
 import * as cookies from 'lib/cookies';
@@ -81,12 +83,27 @@ const NavigationDesktop = () => {
       <Box as="nav" mt={ 8 } w="100%">
         <VStack as="ul" spacing="1" alignItems="flex-start">
           { mainNavItems.map((item) => {
+            console.log(item, '--==--');
             if (isGroupItem(item)) {
               return <NavLinkGroupDesktop key={ item.text } item={ item } isCollapsed={ isCollapsed }/>;
             } else {
               return <NavLink key={ item.text } item={ item } isCollapsed={ isCollapsed }/>;
             }
           }) }
+          <NavLink key="staking" item={{
+            text: 'Staking',
+            url: 'https://portal-beta.artela.network/Artela/home',
+            isActive: false,
+            icon: () => <Icon as={ stakingIcon }/>,
+          }} isCollapsed={ isCollapsed }/>
+          <NavLink key="gov" item={{
+            text: 'Governance',
+            url: 'https://portal-beta.artela.network/Artela/gov',
+            isActive: false,
+            icon: () => <Icon as={ governanceIcon }/>,
+
+          }} isCollapsed={ isCollapsed }/>
+
         </VStack>
       </Box>
       { hasAccount && (
