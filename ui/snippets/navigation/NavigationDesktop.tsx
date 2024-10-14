@@ -83,7 +83,6 @@ const NavigationDesktop = () => {
       <Box as="nav" mt={ 8 } w="100%">
         <VStack as="ul" spacing="1" alignItems="flex-start">
           { mainNavItems.map((item) => {
-            console.log(item, '--==--');
             if (isGroupItem(item)) {
               return <NavLinkGroupDesktop key={ item.text } item={ item } isCollapsed={ isCollapsed }/>;
             } else {
@@ -94,14 +93,13 @@ const NavigationDesktop = () => {
             text: 'Staking',
             url: 'https://portal-beta.artela.network/Artela/home',
             isActive: false,
-            icon: () => <Icon as={ stakingIcon }/>,
+            icon: () => <Icon as={ stakingIcon } boxSize="26px"/>,
           }} isCollapsed={ isCollapsed }/>
           <NavLink key="gov" item={{
             text: 'Governance',
             url: 'https://portal-beta.artela.network/Artela/gov',
             isActive: false,
-            icon: () => <Icon as={ governanceIcon }/>,
-
+            icon: () => <Icon as={ governanceIcon } boxSize="24px"/>,
           }} isCollapsed={ isCollapsed }/>
 
         </VStack>
