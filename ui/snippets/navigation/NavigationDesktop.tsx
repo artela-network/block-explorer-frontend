@@ -4,6 +4,7 @@ import React from 'react';
 import config from 'configs/app';
 import chevronIcon from 'icons/arrows/east-mini.svg';
 import governanceIcon from 'icons/gov.svg';
+import aivinIcon from 'icons/networks/aivinci.svg';
 import exchangeIcon from 'icons/networks/exchange.svg';
 import stakingIcon from 'icons/staking.svg';
 import { useAppContext } from 'lib/contexts/app';
@@ -60,7 +61,7 @@ const NavigationDesktop = () => {
     if (isCollapsed) {
       return '';
     }
-    return config.chain.isTestnet ? 'Artela Testnet' : 'Artela Mainnet';
+    return config.chain.isTestnet ? 'Artela Mainnet' : 'Artela Testnet';
   };
 
   return (
@@ -76,7 +77,6 @@ const NavigationDesktop = () => {
       width={{ lg: isExpanded ? '229px' : '92px', xl: isCollapsed ? '92px' : '229px' }}
       { ...getDefaultTransitionProps({ transitionProperty: 'width, padding' }) }
     >
-      { /* { config.chain.isTestnet && <Icon as={ testnetIcon } h="14px" w="auto" color="red.400" pl={ 3 } alignSelf="flex-start"/> } */ }
       <Box
         as="header"
         display="flex"
@@ -130,17 +130,22 @@ const NavigationDesktop = () => {
           }) }
           <NavLink key="staking" item={{
             text: 'Staking',
-            url: 'https://portal-beta.artela.network/Artela/home',
+            url: config.chain.isTestnet ? 'https://portal-beta.artela.network/Artela/home' : 'https://portal.artela.network/Artela/home',
             isActive: false,
             icon: () => <Icon as={ stakingIcon } boxSize="26px"/>,
           }} isCollapsed={ isCollapsed }/>
           <NavLink key="gov" item={{
             text: 'Governance',
-            url: 'https://portal-beta.artela.network/Artela/gov',
+            url: config.chain.isTestnet ? 'https://portal-beta.artela.network/Artela/gov' : 'https://portal.artela.network/Artela/gov',
             isActive: false,
             icon: () => <Icon as={ governanceIcon } boxSize="24px"/>,
           }} isCollapsed={ isCollapsed }/>
-
+          <NavLink key="aivin" item={{
+            text: 'Aivinci',
+            url: 'https://aiagent.artela.network/explore',
+            isActive: false,
+            icon: () => <Icon as={ aivinIcon } boxSize="24px"/>,
+          }} isCollapsed={ isCollapsed }/>
         </VStack>
       </Box>
       { hasAccount && (
