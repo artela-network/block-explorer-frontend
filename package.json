@@ -8,7 +8,7 @@
     "npm": "8"
   },
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --port 4000",
     "dev:preset": "./tools/scripts/dev.preset.sh",
     "build": "next build",
     "build:docker": "docker build --platform linux/amd64 --build-arg GIT_COMMIT_SHA=$(git rev-parse --short HEAD) --build-arg GIT_TAG=$(git describe --tags --abbrev=0) -t artelanetwork/block-explorer-frontend ./",

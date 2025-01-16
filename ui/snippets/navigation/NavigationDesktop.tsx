@@ -4,8 +4,8 @@ import React from 'react';
 import config from 'configs/app';
 import chevronIcon from 'icons/arrows/east-mini.svg';
 import governanceIcon from 'icons/gov.svg';
+import exchangeIcon from 'icons/networks/exchange.svg';
 import stakingIcon from 'icons/staking.svg';
-import testnetIcon from 'icons/testnet.svg';
 import { useAppContext } from 'lib/contexts/app';
 import * as cookies from 'lib/cookies';
 import useHasAccount from 'lib/hooks/useHasAccount';
@@ -49,6 +49,13 @@ const NavigationDesktop = () => {
 
   const isExpanded = isCollapsed === false;
 
+  const handleExplorerClick = React.useCallback(() => {
+    const url = config.chain.isTestnet ?
+      'https://betanet-scan.artela.network/' :
+      'https://artscan.artela.network/';
+    window.open(url);
+  }, []);
+
   return (
     <Flex
       display={{ base: 'none', lg: 'flex' }}
@@ -62,7 +69,7 @@ const NavigationDesktop = () => {
       width={{ lg: isExpanded ? '229px' : '92px', xl: isCollapsed ? '92px' : '229px' }}
       { ...getDefaultTransitionProps({ transitionProperty: 'width, padding' }) }
     >
-      { config.chain.isTestnet && <Icon as={ testnetIcon } h="14px" w="auto" color="red.400" pl={ 3 } alignSelf="flex-start"/> }
+      { /* { config.chain.isTestnet && <Icon as={ testnetIcon } h="14px" w="auto" color="red.400" pl={ 3 } alignSelf="flex-start"/> } */ }
       <Box
         as="header"
         display="flex"
@@ -79,6 +86,32 @@ const NavigationDesktop = () => {
       >
         <NetworkLogo isCollapsed={ isCollapsed }/>
         { Boolean(config.UI.sidebar.featuredNetworks) && <NetworkMenu isCollapsed={ isCollapsed }/> }
+      </Box>
+
+      <Box as="div" mt={ 4 } w="100%"
+        h="32px"
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+      >
+        <Box
+          onClick={ handleExplorerClick }
+          as="span"
+          w="150px"
+          h="36px"
+          border="1px solid"
+          display="flex"
+          justifyContent="center"
+          gap="4px"
+          alignItems="center"
+          borderColor="#0000002B"
+          cursor="pointer"
+          fontSize={ 16 }
+        >
+
+          { config.chain.isTestnet ? 'Artela Testnet' : 'Artela Mainnet' }
+          <Icon as={ exchangeIcon } boxSize="20px"/>
+        </Box>
       </Box>
       <Box as="nav" mt={ 8 } w="100%">
         <VStack as="ul" spacing="1" alignItems="flex-start">
