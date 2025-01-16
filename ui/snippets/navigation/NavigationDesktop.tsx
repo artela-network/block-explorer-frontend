@@ -52,8 +52,8 @@ const NavigationDesktop = () => {
 
   const handleExplorerClick = React.useCallback(() => {
     const url = config.chain.isTestnet ?
-      'https://betanet-scan.artela.network/' :
-      'https://artscan.artela.network/';
+      'https://artscan.artela.network/' :
+      'https://beta-scan.artela.network/';
     window.open(url);
   }, []);
 
