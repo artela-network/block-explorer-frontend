@@ -56,6 +56,13 @@ const NavigationDesktop = () => {
     window.open(url);
   }, []);
 
+  const getExplorerText = () => {
+    if (isCollapsed) {
+      return '';
+    }
+    return config.chain.isTestnet ? 'Artela Testnet' : 'Artela Mainnet';
+  };
+
   return (
     <Flex
       display={{ base: 'none', lg: 'flex' }}
@@ -97,7 +104,7 @@ const NavigationDesktop = () => {
         <Box
           onClick={ handleExplorerClick }
           as="span"
-          w="150px"
+          w={{ lg: isCollapsed ? '40px' : '150px', xl: isCollapsed ? '40px' : '150px' }}
           h="36px"
           border="1px solid"
           display="flex"
@@ -108,8 +115,7 @@ const NavigationDesktop = () => {
           cursor="pointer"
           fontSize={ 16 }
         >
-
-          { config.chain.isTestnet ? 'Artela Testnet' : 'Artela Mainnet' }
+          { getExplorerText() }
           <Icon as={ exchangeIcon } boxSize="20px"/>
         </Box>
       </Box>
