@@ -61,7 +61,7 @@ const NavigationDesktop = () => {
     if (isCollapsed) {
       return '';
     }
-    return config.chain.isTestnet ? 'Artela Mainnet' : 'Artela Testnet';
+    return config.chain.isTestnet ? 'Go To Mainnet' : 'Go To Testnet';
   };
 
   return (
