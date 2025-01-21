@@ -5,7 +5,6 @@ import { route } from 'nextjs-routes';
 
 import config from 'configs/app';
 import iconPlaceholder from 'icons/networks/icon-placeholder.svg';
-import testnetIcon from 'icons/networks/logo-placeholder-testnet.svg';
 import logoPlaceholder from 'icons/networks/logo-placeholder.svg';
 
 interface Props {
@@ -35,9 +34,9 @@ const LogoFallback = ({ isCollapsed, isSmall }: { isCollapsed?: boolean; isSmall
     if (isSmall) {
       return iconPlaceholder;
     }
-    if (config.chain.isTestnet) {
-      return testnetIcon;
-    }
+    // if (config.chain.isTestnet) {
+    //   return testnetIcon;
+    // }
     return logoPlaceholder;
   };
 
@@ -65,8 +64,8 @@ const NetworkLogo = ({ isCollapsed, onClick }: Props) => {
     <Box
       as="a"
       href={ route({ pathname: '/' }) }
-      width={{ base: 'auto', lg: isCollapsed === false ? '180px' : '30px', xl: isCollapsed ? '40px' : '180px' }}
-      height={{ base: '30px', lg: isCollapsed === false ? '50px' : '40px', xl: isCollapsed ? '30px' : '40px' }}
+      width={{ base: 'auto', lg: isCollapsed === false ? '160px' : '30px', xl: isCollapsed ? '40px' : '160px' }}
+      height={{ base: '30px', lg: isCollapsed === false ? '30px' : '40px', xl: isCollapsed ? '30px' : '40px' }}
       display="inline-flex"
       overflow="hidden"
       onClick={ onClick }
@@ -75,8 +74,8 @@ const NetworkLogo = ({ isCollapsed, onClick }: Props) => {
     >
       { /* big logo */ }
       <Image
-        w="auto%"
-        h="100%"
+        w="100%"
+        h="auto"
         src={ logoSrc }
         alt={ `${ config.chain.name } network logo` }
         fallback={ <LogoFallback isCollapsed={ isCollapsed }/> }

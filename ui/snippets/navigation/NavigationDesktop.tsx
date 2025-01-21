@@ -1,11 +1,13 @@
-import { Flex, Box, VStack, Icon, useColorModeValue } from '@chakra-ui/react';
+import { Flex, Box, VStack, Icon, useColorModeValue, Menu, MenuButton, MenuList, MenuItem, Text } from '@chakra-ui/react';
 import React from 'react';
 
 import config from 'configs/app';
 import chevronIcon from 'icons/arrows/east-mini.svg';
 import governanceIcon from 'icons/gov.svg';
 import aivinIcon from 'icons/networks/aivinci.svg';
-import exchangeIcon from 'icons/networks/exchange.svg';
+import artIcon from 'icons/networks/art.svg';
+import menuIcon from 'icons/networks/menu.svg';
+import successIcon from 'icons/networks/success.svg';
 import stakingIcon from 'icons/staking.svg';
 import { useAppContext } from 'lib/contexts/app';
 import * as cookies from 'lib/cookies';
@@ -50,19 +52,21 @@ const NavigationDesktop = () => {
 
   const isExpanded = isCollapsed === false;
 
-  const handleExplorerClick = React.useCallback(() => {
-    const url = config.chain.isTestnet ?
-      'https://artscan.artela.network/' :
-      'https://betanet-scan.artela.network/';
-    window.open(url);
+  const getExplorerText = () => {
+    return config.chain.isTestnet ? 'Testnet' : 'Mainnet';
+  };
+
+  const handleMainnetClick = React.useCallback(() => {
+    if (!config.chain.isTestnet) {
+      window.open('https://artscan.artela.network/');
+    }
   }, []);
 
-  const getExplorerText = () => {
-    if (isCollapsed) {
-      return '';
+  const handleTestnetClick = React.useCallback(() => {
+    if (config.chain.isTestnet) {
+      window.open('https://betanet-scan.artela.network/');
     }
-    return config.chain.isTestnet ? 'Go To Mainnet' : 'Go To Testnet';
-  };
+  }, []);
 
   return (
     <Flex
@@ -82,44 +86,87 @@ const NavigationDesktop = () => {
         display="flex"
         justifyContent="flex-start"
         alignItems="center"
-        flexDirection="row"
+        flexDirection={{ lg: isExpanded ? 'row' : 'column', xl: isCollapsed ? 'column' : 'row' }}
         w="100%"
+        mt={ 2 }
         pl={{ lg: isExpanded ? 3 : '15px', xl: isCollapsed ? '15px' : 3 }}
         pr={{ lg: isExpanded ? 0 : '15px', xl: isCollapsed ? '15px' : 0 }}
-        h={ 10 }
+        h={ isCollapsed ? 'auto' : 10 }
+        gap={ isCollapsed ? 2 : 0 }
         transitionProperty="padding"
         transitionDuration="normal"
         transitionTimingFunction="ease"
       >
         <NetworkLogo isCollapsed={ isCollapsed }/>
+        <Menu>
+          <MenuButton p={ 0 } mt={ 2 }>
+            <Icon
+              as={ menuIcon }
+              width="24px"
+              height="24px"
+              cursor="pointer"
+              _hover={{ color: 'gray.600' }}
+            />
+          </MenuButton>
+          <MenuList>
+            <MenuItem
+              onClick={ handleMainnetClick }
+              cursor={ !config.chain.isTestnet ? 'default' : 'pointer' }
+            >
+              <Flex align="center" gap={ 3 } justify="space-between" width="100%">
+                <Flex align="center" gap={ 3 }>
+                  <Icon as={ artIcon } boxSize="24px"/>
+                  <Text color={ !config.chain.isTestnet ? 'blue.500' : 'inherit' }>
+                    Artela Mainnet
+                  </Text>
+                </Flex>
+                { !config.chain.isTestnet && <Icon as={ successIcon } boxSize="20px" color="blue.500"/> }
+              </Flex>
+            </MenuItem>
+            <MenuItem
+              onClick={ handleTestnetClick }
+              cursor={ config.chain.isTestnet ? 'default' : 'pointer' }
+            >
+              <Flex align="center" gap={ 3 } justify="space-between" width="100%">
+                <Flex align="center" gap={ 3 }>
+                  <Icon as={ artIcon } boxSize="24px"/>
+                  <Text color={ config.chain.isTestnet ? 'blue.500' : 'inherit' }>
+                    Artela Testnet
+                  </Text>
+                </Flex>
+                { config.chain.isTestnet && <Icon as={ successIcon } boxSize="20px" color="blue.500"/> }
+              </Flex>
+            </MenuItem>
+          </MenuList>
+        </Menu>
         { Boolean(config.UI.sidebar.featuredNetworks) && <NetworkMenu isCollapsed={ isCollapsed }/> }
       </Box>
 
-      <Box as="div" mt={ 4 } w="100%"
+      <Box as="div" ml={ !isCollapsed ? 4 : 2 } w="100%"
         h="32px"
         display="flex"
-        justifyContent="center"
+        justifyContent="flex-start"
         alignItems="center"
       >
         <Box
-          onClick={ handleExplorerClick }
           as="span"
-          w={{ lg: isCollapsed ? '40px' : '150px', xl: isCollapsed ? '40px' : '150px' }}
-          h="36px"
+          w={{ lg: isExpanded ? '50px' : '40px' }}
+          h="18px"
           border="1px solid"
           display="flex"
           justifyContent="center"
           gap="4px"
           alignItems="center"
-          borderColor="#0000002B"
-          cursor="pointer"
-          fontSize={ 16 }
+          borderRadius="4px"
+          borderColor="#ED4E00"
+          fontSize={ isExpanded ? 12 : 10 }
+          p="0 4px"
+          color="#ED4E00"
         >
           { getExplorerText() }
-          <Icon as={ exchangeIcon } boxSize="20px"/>
         </Box>
       </Box>
-      <Box as="nav" mt={ 8 } w="100%">
+      <Box as="nav" mt={ 4 } w="100%">
         <VStack as="ul" spacing="1" alignItems="flex-start">
           { mainNavItems.map((item) => {
             if (isGroupItem(item)) {
