@@ -57,13 +57,13 @@ const NavigationDesktop = () => {
   };
 
   const handleMainnetClick = React.useCallback(() => {
-    if (!config.chain.isTestnet) {
+    if (config.chain.isTestnet) {
       window.open('https://artscan.artela.network/');
     }
   }, []);
 
   const handleTestnetClick = React.useCallback(() => {
-    if (config.chain.isTestnet) {
+    if (!config.chain.isTestnet) {
       window.open('https://betanet-scan.artela.network/');
     }
   }, []);
