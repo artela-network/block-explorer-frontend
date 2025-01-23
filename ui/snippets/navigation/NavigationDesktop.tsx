@@ -8,6 +8,7 @@ import aivinIcon from 'icons/networks/aivinci.svg';
 import artIcon from 'icons/networks/art.svg';
 import menuIcon from 'icons/networks/menu.svg';
 import successIcon from 'icons/networks/success.svg';
+import swapIcon from 'icons/networks/swap.svg';
 import stakingIcon from 'icons/staking.svg';
 import { useAppContext } from 'lib/contexts/app';
 import * as cookies from 'lib/cookies';
@@ -192,6 +193,12 @@ const NavigationDesktop = () => {
             url: 'https://aiagent.artela.network/explore',
             isActive: false,
             icon: () => <Icon as={ aivinIcon } boxSize="24px"/>,
+          }} isCollapsed={ isCollapsed }/>
+          <NavLink key="swap" item={{
+            text: 'Trade',
+            url: 'https://www.gate.io/trade/ARTELA_USDT',
+            isActive: false,
+            icon: () => <Icon as={ swapIcon } boxSize="24px"/>,
           }} isCollapsed={ isCollapsed }/>
         </VStack>
       </Box>
