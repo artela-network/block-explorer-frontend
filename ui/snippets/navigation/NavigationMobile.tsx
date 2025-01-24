@@ -2,7 +2,12 @@ import { Box, Flex, Text, Icon, VStack, useColorModeValue } from '@chakra-ui/rea
 import { animate, motion, useMotionValue } from 'framer-motion';
 import React, { useCallback } from 'react';
 
+import config from 'configs/app';
 import chevronIcon from 'icons/arrows/east-mini.svg';
+import governanceIcon from 'icons/gov.svg';
+import aivinIcon from 'icons/networks/aivinci.svg';
+import swapIcon from 'icons/networks/swap.svg';
+import stakingIcon from 'icons/staking.svg';
 import useHasAccount from 'lib/hooks/useHasAccount';
 import useNavItems, { isGroupItem } from 'lib/hooks/useNavItems';
 import NavLink from 'ui/snippets/navigation/NavLink';
@@ -62,6 +67,30 @@ const NavigationMobile = () => {
                 return <NavLink key={ item.text } item={ item }/>;
               }
             }) }
+            <NavLink key="staking" item={{
+              text: 'Staking',
+              url: config.chain.isTestnet ? 'https://portal-beta.artela.network/Artela/home' : 'https://portal.artela.network/Artela/home',
+              isActive: false,
+              icon: () => <Icon as={ stakingIcon } boxSize="26px"/>,
+            }}/>
+            <NavLink key="gov" item={{
+              text: 'Governance',
+              url: config.chain.isTestnet ? 'https://portal-beta.artela.network/Artela/gov' : 'https://portal.artela.network/Artela/gov',
+              isActive: false,
+              icon: () => <Icon as={ governanceIcon } boxSize="24px"/>,
+            }}/>
+            <NavLink key="aivin" item={{
+              text: 'Aivinci',
+              url: 'https://aiagent.artela.network/explore',
+              isActive: false,
+              icon: () => <Icon as={ aivinIcon } boxSize="24px"/>,
+            }}/>
+            <NavLink key="swap" item={{
+              text: 'Trade',
+              url: 'https://www.gate.io/trade/ARTELA_USDT',
+              isActive: false,
+              icon: () => <Icon as={ swapIcon } boxSize="24px"/>,
+            }}/>
           </VStack>
         </Box>
         { hasAccount && (
